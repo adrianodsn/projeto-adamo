@@ -11,7 +11,7 @@ namespace WebApplication
 {
 
 
-    public partial class PgCidade
+    public partial class PgProduto
     {
 
         /// <summary>
@@ -33,22 +33,49 @@ namespace WebApplication
         protected global::System.Web.UI.HtmlControls.HtmlForm form;
 
         /// <summary>
-        /// Controle txtNome.
+        /// Controle rfvDescricao.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNome;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescricao;
 
         /// <summary>
-        /// Controle ddlEstadoId.
+        /// Controle txtDescricao.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstadoId;
+        protected global::System.Web.UI.WebControls.TextBox txtDescricao;
+
+        /// <summary>
+        /// Controle rfvVlrUnitario.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvVlrUnitario;
+
+        /// <summary>
+        /// Controle txtValorUnit.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtValorUnit;
+
+        /// <summary>
+        /// Controle txtQtdEstoque.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtQtdEstoque;
 
         /// <summary>
         /// Controle ltvNotifications.

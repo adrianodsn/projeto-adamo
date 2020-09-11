@@ -11,7 +11,7 @@ namespace WebApplication
 {
 
 
-    public partial class PgCidades
+    public partial class PgPessoas
     {
 
         /// <summary>
@@ -24,22 +24,40 @@ namespace WebApplication
         protected global::System.Web.UI.HtmlControls.HtmlForm form;
 
         /// <summary>
-        /// Controle txtQ.
+        /// Controle txtNome.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQ;
+        protected global::System.Web.UI.WebControls.TextBox txtNome;
 
         /// <summary>
-        /// Controle ddlEstadoId.
+        /// Controle txtCpf.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstadoId;
+        protected global::System.Web.UI.WebControls.TextBox txtCpf;
+
+        /// <summary>
+        /// Controle txtDataNascIni.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDataNascIni;
+
+        /// <summary>
+        /// Controle txtDataNascFim.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDataNascFim;
 
         /// <summary>
         /// Controle btnFilter.
@@ -51,12 +69,12 @@ namespace WebApplication
         protected global::System.Web.UI.WebControls.LinkButton btnFilter;
 
         /// <summary>
-        /// Controle grvCidades.
+        /// Controle grvPessoas.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvCidades;
+        protected global::System.Web.UI.WebControls.GridView grvPessoas;
     }
 }

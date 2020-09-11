@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="cidade.aspx.cs" Inherits="WebApplication.PgCidade" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="fornecedor.aspx.cs" Inherits="WebApplication.PgFornecedor" %>
 
 <!DOCTYPE html>
 
@@ -19,18 +19,25 @@
 
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label>Nome da cidade</label>
+                        <label>
+                            CNPJ
+                            <asp:RequiredFieldValidator ID="rfvCnpj" runat="server" ErrorMessage="obrigatório" ControlToValidate="txtCnpj" CssClass="label label-danger" SetFocusOnError="true"></asp:RequiredFieldValidator>
+                        </label>
+                        <asp:TextBox ID="txtCnpj" runat="server" CssClass="form-control cnpj"></asp:TextBox>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label>
+                            Nome Fornecedor
+                            <asp:RequiredFieldValidator ID="rfvNome" runat="server" ErrorMessage="obrigatório" ControlToValidate="txtNome" CssClass="label label-danger" SetFocusOnError="true"></asp:RequiredFieldValidator>
+                        </label>
                         <asp:TextBox ID="txtNome" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Estado</label>
-                        <asp:DropDownList ID="ddlEstadoId" runat="server" CssClass="form-control"></asp:DropDownList>
-                    </div>
-                </div>
+                </div>                
             </div>
 
             <asp:ListView runat="server" ID="ltvNotifications">
@@ -53,6 +60,11 @@
         </form>
 
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="assets/js/jquery.mask.min.js"></script>
+    <script>
+        $('.cnpj').mask('00.000.000/0000-00');
+    </script>
 
 </body>
 </html>

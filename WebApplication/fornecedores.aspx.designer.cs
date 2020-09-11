@@ -11,7 +11,7 @@ namespace WebApplication
 {
 
 
-    public partial class PgCidades
+    public partial class PgFornecedores
     {
 
         /// <summary>
@@ -24,22 +24,22 @@ namespace WebApplication
         protected global::System.Web.UI.HtmlControls.HtmlForm form;
 
         /// <summary>
-        /// Controle txtQ.
+        /// Controle txtNome.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQ;
+        protected global::System.Web.UI.WebControls.TextBox txtNome;
 
         /// <summary>
-        /// Controle ddlEstadoId.
+        /// Controle txtCnpj.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstadoId;
+        protected global::System.Web.UI.WebControls.TextBox txtCnpj;
 
         /// <summary>
         /// Controle btnFilter.
@@ -51,12 +51,12 @@ namespace WebApplication
         protected global::System.Web.UI.WebControls.LinkButton btnFilter;
 
         /// <summary>
-        /// Controle grvCidades.
+        /// Controle grvFornecedores.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvCidades;
+        protected global::System.Web.UI.WebControls.GridView grvFornecedores;
     }
 }

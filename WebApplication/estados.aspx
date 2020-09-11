@@ -18,6 +18,20 @@
         </div>
 
         <form runat="server" id="form">
+                        <div class="panel panel-default">
+                <div class="panel-heading">Filtro</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <asp:TextBox ID="txtNome" runat="server" CssClass="form-control" placeholder="Palavra-chave" TextMode="Search"></asp:TextBox>
+                        </div>
+                        <div class="col-md-4">
+                            <asp:LinkButton ID="btnFilter" runat="server" CssClass="btn btn-primary" OnClick="btnFilter_Click">Filtrar</asp:LinkButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <asp:GridView ID="grvEstados" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table" DataKeyNames="Id" OnRowDeleting="grvEstados_RowDeleting">
                 <Columns>
 

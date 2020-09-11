@@ -11,7 +11,7 @@ namespace WebApplication
 {
 
 
-    public partial class PgCidades
+    public partial class PgCompras
     {
 
         /// <summary>
@@ -24,22 +24,31 @@ namespace WebApplication
         protected global::System.Web.UI.HtmlControls.HtmlForm form;
 
         /// <summary>
-        /// Controle txtQ.
+        /// Controle ddlFornecedorId.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQ;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFornecedorId;
 
         /// <summary>
-        /// Controle ddlEstadoId.
+        /// Controle txtDataIni.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstadoId;
+        protected global::System.Web.UI.WebControls.TextBox txtDataIni;
+
+        /// <summary>
+        /// Controle txtDataFim.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDataFim;
 
         /// <summary>
         /// Controle btnFilter.
@@ -51,12 +60,21 @@ namespace WebApplication
         protected global::System.Web.UI.WebControls.LinkButton btnFilter;
 
         /// <summary>
-        /// Controle grvCidades.
+        /// Controle btnLimpar.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvCidades;
+        protected global::System.Web.UI.WebControls.LinkButton btnLimpar;
+
+        /// <summary>
+        /// Controle grvCompras.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grvCompras;
     }
 }

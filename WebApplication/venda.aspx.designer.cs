@@ -11,7 +11,7 @@ namespace WebApplication
 {
 
 
-    public partial class PgCidade
+    public partial class PgVenda
     {
 
         /// <summary>
@@ -33,22 +33,58 @@ namespace WebApplication
         protected global::System.Web.UI.HtmlControls.HtmlForm form;
 
         /// <summary>
-        /// Controle txtNome.
+        /// Controle rfvDataVenda.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNome;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDataVenda;
 
         /// <summary>
-        /// Controle ddlEstadoId.
+        /// Controle txtDataVenda.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstadoId;
+        protected global::System.Web.UI.WebControls.TextBox txtDataVenda;
+
+        /// <summary>
+        /// Controle rfvNomeCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNomeCliente;
+
+        /// <summary>
+        /// Controle txtNomeCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNomeCliente;
+
+        /// <summary>
+        /// Controle btnAdicionarItem.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAdicionarItem;
+
+        /// <summary>
+        /// Controle grvItensVenda.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grvItensVenda;
 
         /// <summary>
         /// Controle ltvNotifications.

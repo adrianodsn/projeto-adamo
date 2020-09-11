@@ -20,7 +20,7 @@ namespace WebApplication
 
             if (!IsPostBack)
             {
-                litAcao.Text = "Novo estado";
+                litAcao.Text = "Nova cidade";
 
                 ddlEstadoId.DataSource = DB.Estados.ToList();
                 ddlEstadoId.DataTextField = "Nome";
@@ -30,7 +30,7 @@ namespace WebApplication
 
                 if (Cidade != null)
                 {
-                    litAcao.Text = "Edição de estado";
+                    litAcao.Text = "Edição de cidade";
 
                     txtNome.Text = Cidade.Nome;
                     ddlEstadoId.SelectedValue = Cidade.EstadoId.ToString();
@@ -47,7 +47,6 @@ namespace WebApplication
 
             if (Cidade == null)
             {
-
                 Cidade = new Cidade(estado, nome);
                 DB.Cidades.Add(Cidade);
             }

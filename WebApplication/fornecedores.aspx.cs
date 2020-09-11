@@ -6,7 +6,7 @@ using WebApplication.Infra.Context;
 
 namespace WebApplication
 {
-    public partial class PgEstados : Page
+    public partial class PgFornecedores : Page
     {
         ApContext DB = new ApContext();
 
@@ -20,33 +20,32 @@ namespace WebApplication
 
         private void CarregarRegistros()
         {
-            IQueryable<Estado> estados = DB.Estados;
+            IQueryable<Fornecedor> fornecedores = DB.Fornecedores;
 
             var nom = Request.QueryString["nom"];
+            var cnpj = Request.QueryString["cnpj"];
 
             if (!string.IsNullOrEmpty(nom))
             {
                 txtNome.Text = nom;
 
-                estados = estados.Where(x => x.Nome.Contains(nom));
+                fornecedores = fornecedores.Where(x => x.Nome.Contains(nom));
             }
 
-            grvEstados.DataSource = estados.ToList();
-            grvEstados.DataBind();
-        }
+            if (!string.IsNullOrEmpty(cnpj))
+            {
+                txtCnpj.Text = cnpj;
 
-        protected void grvEstados_RowDeleting(object sender, System.Web.UI.WebControls.GridViewDeleteEventArgs e)
-        {
-            var id = Convert.ToInt32(grvEstados.DataKeys[e.RowIndex].Value);
-            var estado = DB.Estados.Find(id);
-            DB.Estados.Remove(estado);
-            DB.SaveChanges();
-            CarregarRegistros();
+                fornecedores = fornecedores.Where(x => x.Cnpj == cnpj);
+            }
+
+            grvFornecedores.DataSource = fornecedores.ToList();
+            grvFornecedores.DataBind();
         }
 
         protected void btnFilter_Click(object sender, EventArgs e)
         {
-            Response.Redirect($"estados.aspx?nom={txtNome.Text}");
+            Response.Redirect($"fornecedores.aspx?nom={txtNome.Text}&cnpj={txtCnpj.Text}");
         }
     }
 }
