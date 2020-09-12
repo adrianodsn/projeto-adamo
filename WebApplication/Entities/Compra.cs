@@ -15,6 +15,7 @@ namespace WebApplication.Entities
         public Compra(DateTime data, Fornecedor fornecedor)
         {
             Set(data, fornecedor);
+            ItensCompra = new HashSet<ItemCompra>();
         }
 
         public int Id { get; private set; }

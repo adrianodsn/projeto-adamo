@@ -7,9 +7,9 @@ namespace WebApplication.Entities
     {
         public ItemCompra() { }
 
-        public ItemCompra(Produto produto, int qtd)
+        public ItemCompra(Produto produto, int qtd, decimal valorUnit)
         {
-            Set(produto, qtd);
+            Set(produto, qtd, valorUnit);
         }
 
         public int Id { get; set; }
@@ -19,25 +19,14 @@ namespace WebApplication.Entities
         public Produto Produto { get; set; }
         public int Qtd { get; set; }
         public bool Excluir { get; set; }
-        //public decimal Total => Qtd * Produto.ValorUnitario;
-   
-        public decimal Total {
-            get
-            {
-                if (Produto != null)
-                {
-                    return Qtd * Produto.ValorUnitario;
-                }
-                else {
-                    return 0;
-                }
-            }
-        }
+        public decimal ValorUnitario { get; set; }
+        public decimal Total => Qtd * ValorUnitario;
 
-        public void Set(Produto produto, int qtd)
+        public void Set(Produto produto, int qtd, decimal valorUnit)
         {
             Produto = produto;
             Qtd = qtd;
+            ValorUnitario = valorUnit;
 
             if (Compra != null)
             {

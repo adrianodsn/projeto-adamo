@@ -84,7 +84,7 @@
                                             Valor
                                             <asp:RequiredFieldValidator ID="rfvValor" runat="server" ErrorMessage="obrigatório" ControlToValidate="txtValor" CssClass="label label-danger" Display="Dynamic" SetFocusOnError="true"></asp:RequiredFieldValidator>
                                         </div>
-                                        <asp:TextBox ID="txtValor" runat="server" CssClass="form-control money" Enabled="false" Text='<%# Eval("Produto.ValorUnitario", "{0:N2}") %>' valorunit></asp:TextBox>
+                                        <asp:TextBox ID="txtValor" runat="server" CssClass="form-control money" Text='<%# Eval("ValorUnitario", "{0:N2}") %>' valorunit></asp:TextBox>
                                     </div>
                                 </ItemTemplate>
                             </asp:TemplateField>

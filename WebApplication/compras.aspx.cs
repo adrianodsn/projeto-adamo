@@ -89,6 +89,13 @@ namespace WebApplication
             CarregarRegistros();
         }
 
-
+        protected void grvCompras_RowDeleting1(object sender, GridViewDeleteEventArgs e)
+        {
+            var id = Convert.ToInt32(grvCompras.DataKeys[e.RowIndex].Value);
+            var Compra = DB.Compras.Find(id);
+            DB.Compras.Remove(Compra);
+            DB.SaveChanges();
+            CarregarRegistros();
+        }
     }
 }

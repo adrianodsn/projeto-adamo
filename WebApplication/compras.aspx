@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <asp:GridView ID="grvCompras" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table" DataKeyNames="Id">
+                <asp:GridView ID="grvCompras" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table" DataKeyNames="Id" OnRowDeleting="grvCompras_RowDeleting1">
                     <Columns>
 
                         <asp:TemplateField HeaderText="#">
@@ -70,7 +70,7 @@
                         <asp:TemplateField>
                             <ItemTemplate>
                                 <a href="<%# Eval("Id", "compra.aspx?id={0}") %>" class="btn btn-primary">Itens</a>
-                                <asp:LinkButton ID="btnDelete" runat="server" class="btn btn-danger" CommandName="Delete">Excluir</asp:LinkButton>
+                                <asp:LinkButton ID="btnDelete" runat="server" class="btn btn-danger" CommandName="Delete"  OnClientClick="return confirm('Excluir registro?');">Excluir</asp:LinkButton>
                             </ItemTemplate>
                             <ItemStyle CssClass="text-right" />
                         </asp:TemplateField>

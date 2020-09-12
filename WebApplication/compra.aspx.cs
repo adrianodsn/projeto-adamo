@@ -74,7 +74,7 @@ namespace WebApplication
                 var valorUnit = !string.IsNullOrEmpty(txtValor.Text) ? Convert.ToDecimal(txtValor.Text) : 0;
                 var excluir = !row.Visible;
 
-                itens.Add(new ItemCompra() { Id = id, ProdutoId = produtoId, Qtd = qtd, Excluir = excluir });
+                itens.Add(new ItemCompra() { Id = id, ProdutoId = produtoId, Qtd = qtd, ValorUnitario = valorUnit, Excluir = excluir });
             }
 
             grvItensCompra.DataSource = itens;
@@ -98,11 +98,7 @@ namespace WebApplication
 
                 txtQuantidade.Text = itemCompra.Qtd > 0 ? itemCompra.Qtd.ToString() : string.Empty;
 
-                if (itemCompra.Produto != null)
-                {
-                    txtValor.Text = itemCompra.Produto.ValorUnitario > 0 ? itemCompra.Produto.ValorUnitario.ToString("N2") : string.Empty;
-                }
-                else { txtValor.Text = "0"; }
+                txtValor.Text = itemCompra.ValorUnitario > 0 ? itemCompra.ValorUnitario.ToString("N2") : string.Empty;
 
                 foreach (ListItem item in ddlProdutoIdParent.Items)
                 {
@@ -111,11 +107,24 @@ namespace WebApplication
 
                 ddlProdutoId.SelectedValue = !itemCompra.ProdutoId.Equals(0) ? itemCompra.ProdutoId.ToString() : string.Empty;
 
-                //var excluir = Convert.ToBoolean(grvItensVenda.DataKeys[e.Row.RowIndex].Values["Excluir"]);
                 e.Row.Visible = !itemCompra.Excluir;
+
+                if (itemCompra.ProdutoId.Equals(0) && itemCompra.Qtd.Equals(0) && itemCompra.ValorUnitario.Equals(0))
+                {
+                    ddlProdutoId.Enabled
+                    = txtQuantidade.Enabled
+                    = txtValor.Enabled
+                    = true;
+                }
+                else
+                {
+                    ddlProdutoId.Enabled
+                    = txtQuantidade.Enabled
+                    = txtValor.Enabled
+                    = false;
+                }
             }
         }
-
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -138,8 +147,10 @@ namespace WebApplication
                 var id = Convert.ToInt32(grvItensCompra.DataKeys[row.RowIndex].Values["Id"]);
                 var txtQuantidade = (TextBox)row.FindControl("txtQuantidade");
                 var txtValor = (TextBox)row.FindControl("txtValor");
-                var qtd = Convert.ToInt32(txtQuantidade.Text);
-                var valorUnit = Convert.ToDecimal(txtValor.Text);
+
+                var qtd = !string.IsNullOrEmpty(txtQuantidade.Text) ? Convert.ToInt32(txtQuantidade.Text) : 0;
+                var valorUnit = !string.IsNullOrEmpty(txtValor.Text) ? Convert.ToDecimal(txtValor.Text) : 0;
+
                 var ddlProdutoId = (DropDownList)row.FindControl("ddlProdutoId");
 
                 var produtoId = !string.IsNullOrEmpty(ddlProdutoId.SelectedValue) ? Convert.ToInt32(ddlProdutoId.SelectedValue) : 0;
@@ -149,12 +160,12 @@ namespace WebApplication
                 {
                     if (id == 0)
                     {
-                        Compra.ItensCompra.Add(new ItemCompra(produto, qtd));
+                        Compra.ItensCompra.Add(new ItemCompra(produto, qtd, valorUnit));
                     }
                     else
                     {
                         ItemCompra itCompra = DB.ItensCompra.Find(id);
-                        itCompra.Set(produto, qtd);
+                        itCompra.Set(produto, qtd, valorUnit);
                     }
                 }
                 else
