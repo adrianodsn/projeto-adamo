@@ -17,6 +17,8 @@ namespace WebApplication.Infra.Context
         public virtual DbSet<Fornecedor> Fornecedores { get; set; }
         public virtual DbSet<Compra> Compras { get; set; }
         public virtual DbSet<ItemCompra> ItensCompra { get; set; }
+        public virtual DbSet<Pai> Pais { get; set; }
+        public virtual DbSet<Filho> Filhos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -87,6 +87,7 @@
   <ItemGroup>
     <Content Include="assets\js\jquery.mask.min.js" />
     <Content Include="cidade.aspx" />
+    <Content Include="pais.aspx" />
     <Content Include="fornecedores.aspx" />
     <Content Include="fornecedor.aspx" />
     <Content Include="produto.aspx" />
@@ -104,6 +105,15 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="pais.aspx.cs">
+      <DependentUpon>pais.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pais.aspx.designer.cs">
+      <DependentUpon>pais.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Filho.cs" />
+    <Compile Include="Entities\Pai.cs" />
     <Compile Include="Entities\ItemCompra.cs" />
     <Compile Include="Entities\ItemVenda.cs" />
     <Compile Include="Entities\Cidade.cs" />
@@ -120,6 +130,8 @@
     </Compile>
     <Compile Include="Entities\Compra.cs" />
     <Compile Include="Entities\Venda.cs" />
+    <Compile Include="Infra\Mapping\FilhoMap.cs" />
+    <Compile Include="Infra\Mapping\PaiMap.cs" />
     <Compile Include="Infra\Mapping\FornecedorMap.cs" />
     <Compile Include="Infra\Mapping\ItemCompraMap.cs" />
     <Compile Include="Infra\Mapping\ProdutoMap.cs" />

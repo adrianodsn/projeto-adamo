@@ -89,14 +89,29 @@ namespace WebApplication
                 .Include(x => x.ItensCompra)
                 .FirstOrDefault(x => x.Id == id);
 
-            List<ItemCompra> listaItensCompra = new List<ItemCompra>();
+            var listaItensCompra = new List<ItemCompra>();
             listaItensCompra = compra.ItensCompra.ToList();
 
-            for (int i = 0; i < listaItensCompra.Count; i++)
+            /*for (int i = 0; i < listaItensCompra.Count; i++)
             {
                 var itemId = listaItensCompra[i].Id;
 
                 var itemCompra = DB.ItensCompra.Find(itemId);
+
+                var produtoId = itemCompra.ProdutoId;
+                var qtd = itemCompra.Qtd;
+
+                var produto = DB.Produtos.Find(produtoId);
+
+                produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque - qtd);
+
+                DB.ItensCompra.Remove(itemCompra);
+            }*/
+
+            foreach (ItemCompra registro in listaItensCompra) // Mesma rotina do código acima comentado usando for
+            {
+
+                var itemCompra = DB.ItensCompra.Find(registro.Id);
 
                 var produtoId = itemCompra.ProdutoId;
                 var qtd = itemCompra.Qtd;

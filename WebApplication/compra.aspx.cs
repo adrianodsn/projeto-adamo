@@ -107,7 +107,15 @@ namespace WebApplication
 
                 ddlProdutoId.SelectedValue = !itemCompra.ProdutoId.Equals(0) ? itemCompra.ProdutoId.ToString() : string.Empty;
 
-                e.Row.Visible = !itemCompra.Excluir;
+                e.Row.Visible = !itemCompra.Excluir; //É a mesma coisa do código abaixo comentado
+                /*if (!itemCompra.Excluir)
+                {
+                    e.Row.Visible = true;
+                }
+                else
+                {
+                    e.Row.Visible = false;
+                }*/
 
                 if (itemCompra.ProdutoId.Equals(0))
                 {
@@ -166,9 +174,11 @@ namespace WebApplication
                     else
                     {
                         // Não está executando (Não tem alteração dos itens)
-                        ItemCompra itCompra = DB.ItensCompra.Find(id);
-                        itCompra.Set(produto, qtd, valorUnit);
-                        //produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque + qtd);
+
+                        //ItemCompra itCompra = DB.ItensCompra.Find(id);
+                        //itCompra.Set(produto, qtd, valorUnit);
+                        //produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque - qtdAntiga);
+                        //produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque + qtdNova);
                     }
                 }
                 else

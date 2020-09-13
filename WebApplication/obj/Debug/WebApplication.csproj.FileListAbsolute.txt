@@ -128,4 +128,3 @@ D:\Serplamed\projeto-adamo\WebApplication\bin\roslyn\vbc.exe.config
 D:\Serplamed\projeto-adamo\WebApplication\bin\roslyn\vbc.rsp
 D:\Serplamed\projeto-adamo\WebApplication\bin\roslyn\VBCSCompiler.exe
 D:\Serplamed\projeto-adamo\WebApplication\bin\roslyn\VBCSCompiler.exe.config
-D:\Serplamed\projeto-adamo\WebApplication\obj\Debug\WebApplication.csprojAssemblyReference.cache

@@ -72,7 +72,7 @@
                                             Quantidade
                                             <asp:RequiredFieldValidator ID="rfvQuantidade" runat="server" ErrorMessage="obrigatório" ControlToValidate="txtQuantidade" CssClass="label label-danger" Display="Dynamic" SetFocusOnError="true"></asp:RequiredFieldValidator>
                                         </div>
-                                        <asp:TextBox ID="txtQuantidade" runat="server" CssClass="form-control" Text='<%# Eval("Qtd") %>' qtd></asp:TextBox>
+                                        <asp:TextBox ID="txtQuantidade" runat="server" CssClass="form-control" TextMode="Number" Text='<%# Eval("Qtd") %>' qtd></asp:TextBox>
                                     </div>
                                 </ItemTemplate>
                             </asp:TemplateField>

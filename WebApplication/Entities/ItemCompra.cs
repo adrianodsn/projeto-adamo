@@ -36,7 +36,7 @@ namespace WebApplication.Entities
             AddNotifications(new Contract()
                 .Requires()
                 //.IsBetween(Produto.Descricao.Length, 3, 50, "ItensCompra.Produto", string.Format("O nome do produto deve ter entre {0} e {1} caracteres.", 3, 50))
-                .IsFalse(Compra == null, "ItensCompra.Compra", "A venda não pode ser nula.")
+                .IsFalse(Compra == null, "ItemCompra.Compra", "A venda não pode ser nula.")
             );
         }
     }
