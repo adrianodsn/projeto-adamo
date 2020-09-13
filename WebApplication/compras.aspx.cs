@@ -5,6 +5,7 @@ using System.Web.UI.WebControls;
 using System.Data.Entity;
 using WebApplication.Entities;
 using WebApplication.Infra.Context;
+using System.Collections.Generic;
 
 namespace WebApplication
 {
@@ -83,17 +84,31 @@ namespace WebApplication
         protected void grvCompras_RowDeleting(object sender, System.Web.UI.WebControls.GridViewDeleteEventArgs e)
         {
             var id = Convert.ToInt32(grvCompras.DataKeys[e.RowIndex].Value);
-            var compra = DB.Compras.Find(id);
-            DB.Compras.Remove(compra);
-            DB.SaveChanges();
-            CarregarRegistros();
-        }
 
-        protected void grvCompras_RowDeleting1(object sender, GridViewDeleteEventArgs e)
-        {
-            var id = Convert.ToInt32(grvCompras.DataKeys[e.RowIndex].Value);
-            var Compra = DB.Compras.Find(id);
-            DB.Compras.Remove(Compra);
+            var compra = DB.Compras
+                .Include(x => x.ItensCompra)
+                .FirstOrDefault(x => x.Id == id);
+
+            List<ItemCompra> listaItensCompra = new List<ItemCompra>();
+            listaItensCompra = compra.ItensCompra.ToList();
+
+            for (int i = 0; i < listaItensCompra.Count; i++)
+            {
+                var itemId = listaItensCompra[i].Id;
+
+                var itemCompra = DB.ItensCompra.Find(itemId);
+
+                var produtoId = itemCompra.ProdutoId;
+                var qtd = itemCompra.Qtd;
+
+                var produto = DB.Produtos.Find(produtoId);
+
+                produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque - qtd);
+
+                DB.ItensCompra.Remove(itemCompra);
+            }
+
+            DB.Compras.Remove(compra);
             DB.SaveChanges();
             CarregarRegistros();
         }

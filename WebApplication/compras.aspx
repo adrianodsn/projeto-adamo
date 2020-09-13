@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <asp:GridView ID="grvCompras" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table" DataKeyNames="Id" OnRowDeleting="grvCompras_RowDeleting1">
+                <asp:GridView ID="grvCompras" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table" DataKeyNames="Id" OnRowDeleting="grvCompras_RowDeleting">
                     <Columns>
 
                         <asp:TemplateField HeaderText="#">

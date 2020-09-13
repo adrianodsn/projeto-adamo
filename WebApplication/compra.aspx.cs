@@ -109,7 +109,7 @@ namespace WebApplication
 
                 e.Row.Visible = !itemCompra.Excluir;
 
-                if (itemCompra.ProdutoId.Equals(0) && itemCompra.Qtd.Equals(0) && itemCompra.ValorUnitario.Equals(0))
+                if (itemCompra.ProdutoId.Equals(0))
                 {
                     ddlProdutoId.Enabled
                     = txtQuantidade.Enabled
@@ -121,7 +121,7 @@ namespace WebApplication
                     ddlProdutoId.Enabled
                     = txtQuantidade.Enabled
                     = txtValor.Enabled
-                    = false;
+                    = false; //Aqui vai false
                 }
             }
         }
@@ -161,11 +161,14 @@ namespace WebApplication
                     if (id == 0)
                     {
                         Compra.ItensCompra.Add(new ItemCompra(produto, qtd, valorUnit));
+                        produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque + qtd);
                     }
                     else
                     {
+                        // Não está executando (Não tem alteração dos itens)
                         ItemCompra itCompra = DB.ItensCompra.Find(id);
                         itCompra.Set(produto, qtd, valorUnit);
+                        //produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque + qtd);
                     }
                 }
                 else
@@ -174,6 +177,7 @@ namespace WebApplication
 
                     if (itCompra != null)
                     {
+                        produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque - qtd);
                         DB.ItensCompra.Remove(itCompra);
                     }
                 }
