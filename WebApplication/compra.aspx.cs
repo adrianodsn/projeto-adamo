@@ -59,7 +59,11 @@ namespace WebApplication
         {
             var itens = new List<ItemCompra>();
 
-            itens.Add(new ItemCompra());
+            var produtoId = Convert.ToInt32(ddlProdutoIdParent.SelectedValue);
+            var qtd = Convert.ToInt32(txtQtd.Text);
+
+            var produto = DB.Produtos.Find(produtoId);
+            itens.Add(new ItemCompra() { ProdutoId = produtoId, Qtd = qtd, ValorUnitario = produto.ValorUnitario });
 
             foreach (GridViewRow row in grvItensCompra.Rows)
             {
@@ -68,9 +72,8 @@ namespace WebApplication
                 var txtValor = (TextBox)row.FindControl("txtValor");
 
                 var id = Convert.ToInt32(grvItensCompra.DataKeys[row.RowIndex].Values["Id"]);
-                var produtoId = !string.IsNullOrEmpty(ddlProdutoId.SelectedValue) ? Convert.ToInt32(ddlProdutoId.SelectedValue) : 0;
-
-                var qtd = !string.IsNullOrEmpty(txtQuantidade.Text) ? Convert.ToInt32(txtQuantidade.Text) : 0;
+                produtoId = !string.IsNullOrEmpty(ddlProdutoId.SelectedValue) ? Convert.ToInt32(ddlProdutoId.SelectedValue) : 0;
+                qtd = !string.IsNullOrEmpty(txtQuantidade.Text) ? Convert.ToInt32(txtQuantidade.Text) : 0;
                 var valorUnit = !string.IsNullOrEmpty(txtValor.Text) ? Convert.ToDecimal(txtValor.Text) : 0;
                 var excluir = !row.Visible;
 

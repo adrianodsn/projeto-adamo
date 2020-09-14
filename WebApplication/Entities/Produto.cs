@@ -28,12 +28,17 @@ namespace WebApplication.Entities
         {
             Descricao = descricao;
             ValorUnitario = valorUnitario;
-            QtdEstoque = qtdEstoque;
+            SetQtdEstoque(qtdEstoque);
 
             AddNotifications(new Contract()
                 .Requires()
                 .IsBetween(Descricao.Length, 3, 50, "Produto.Descricao", string.Format("Descrição do produto deve ter entre {0} e {1} caracteres.", 3, 50))
             );
+        }
+
+        public void SetQtdEstoque( int qtdEstoque)
+        {
+            QtdEstoque = qtdEstoque;
         }
     }
 }

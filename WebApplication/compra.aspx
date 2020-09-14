@@ -16,9 +16,6 @@
 
 
         <form runat="server" id="form">
-
-            <asp:DropDownList ID="ddlProdutoIdParent" runat="server" CssClass="form-control" Visible="false"></asp:DropDownList>
-
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -46,8 +43,22 @@
                 <div class="panel-heading">Itens</div>
                 <div class="panel-body">
 
-                    <div class="form-group">
-                        <asp:LinkButton ID="btnAdicionarItem" runat="server" CssClass="btn btn-success" OnClick="btnAdicionarItem_Click" CausesValidation="false">Adicionar item</asp:LinkButton>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <asp:DropDownList ID="ddlProdutoIdParent" runat="server" CssClass="form-control"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <asp:TextBox ID="txtQtd" runat="server" CssClass="form-control" TextMode="Number" placeholder="Quantidade"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <asp:LinkButton ID="btnAdicionarItem" runat="server" CssClass="btn btn-success" OnClick="btnAdicionarItem_Click" CausesValidation="false">Adicionar item</asp:LinkButton>
+                            </div>
+                        </div>
                     </div>
 
                     <asp:GridView ID="grvItensCompra" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table" DataKeyNames="Id,Excluir" ShowHeader="false" OnRowDeleting="grvItensCompra_RowDeleting" OnRowDataBound="grvItensCompra_RowDataBound">

@@ -33,15 +33,6 @@ namespace WebApplication
         protected global::System.Web.UI.HtmlControls.HtmlForm form;
 
         /// <summary>
-        /// Controle ddlProdutoIdParent.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProdutoIdParent;
-
-        /// <summary>
         /// Controle rfvDataCompra.
         /// </summary>
         /// <remarks>
@@ -76,6 +67,24 @@ namespace WebApplication
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlFornecedorId;
+
+        /// <summary>
+        /// Controle ddlProdutoIdParent.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlProdutoIdParent;
+
+        /// <summary>
+        /// Controle txtQtd.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtQtd;
 
         /// <summary>
         /// Controle btnAdicionarItem.

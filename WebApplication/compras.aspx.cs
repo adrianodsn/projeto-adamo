@@ -57,7 +57,7 @@ namespace WebApplication
             {
                 txtDataIni.Text = dataIni.Value.ToString("yyyy-MM-dd");
 
-                compras = compras.Where(x => x.Data>= dataIni);
+                compras = compras.Where(x => x.Data >= dataIni);
             }
 
             if (dataFim != null)
@@ -73,7 +73,7 @@ namespace WebApplication
 
         protected void btnFilter_Click(object sender, EventArgs e)
         {
-             Response.Redirect($"compras.aspx?fornecedorId={ddlFornecedorId.SelectedValue}&dataIni={txtDataIni.Text}&dataFim={txtDataFim.Text}");
+            Response.Redirect($"compras.aspx?fornecedorId={ddlFornecedorId.SelectedValue}&dataIni={txtDataIni.Text}&dataFim={txtDataFim.Text}");
         }
 
         protected void btnLimpar_Click(object sender, EventArgs e)
@@ -85,44 +85,20 @@ namespace WebApplication
         {
             var id = Convert.ToInt32(grvCompras.DataKeys[e.RowIndex].Value);
 
-            var compra = DB.Compras
-                .Include(x => x.ItensCompra)
-                .FirstOrDefault(x => x.Id == id);
+            var itensCompra = DB.ItensCompra
+                .Include(x => x.Produto)
+                .Where(x => x.CompraId == id);
 
-            var listaItensCompra = new List<ItemCompra>();
-            listaItensCompra = compra.ItensCompra.ToList();
-
-            /*for (int i = 0; i < listaItensCompra.Count; i++)
+            foreach (ItemCompra itemCompra in itensCompra) // Mesma rotina do código acima comentado usando for
             {
-                var itemId = listaItensCompra[i].Id;
-
-                var itemCompra = DB.ItensCompra.Find(itemId);
-
-                var produtoId = itemCompra.ProdutoId;
                 var qtd = itemCompra.Qtd;
 
-                var produto = DB.Produtos.Find(produtoId);
-
-                produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque - qtd);
-
-                DB.ItensCompra.Remove(itemCompra);
-            }*/
-
-            foreach (ItemCompra registro in listaItensCompra) // Mesma rotina do código acima comentado usando for
-            {
-
-                var itemCompra = DB.ItensCompra.Find(registro.Id);
-
-                var produtoId = itemCompra.ProdutoId;
-                var qtd = itemCompra.Qtd;
-
-                var produto = DB.Produtos.Find(produtoId);
-
-                produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque - qtd);
+                itemCompra.Produto.SetQtdEstoque(itemCompra.Produto.QtdEstoque - qtd);
 
                 DB.ItensCompra.Remove(itemCompra);
             }
 
+            var compra = DB.Compras.Find(id);
             DB.Compras.Remove(compra);
             DB.SaveChanges();
             CarregarRegistros();

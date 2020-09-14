@@ -64,8 +64,7 @@ namespace WebApplication
                 .Include(x => x.Filhos)
                 .FirstOrDefault(x => x.Id == id);
 
-            var listaFilhos = new List<Filho>();
-            listaFilhos = pai.Filhos.ToList();
+            var listaFilhos = pai.Filhos.ToList();
 
             foreach (Filho registro in listaFilhos)
             {
