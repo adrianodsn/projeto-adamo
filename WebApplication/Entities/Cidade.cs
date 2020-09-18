@@ -7,19 +7,22 @@ namespace WebApplication.Entities
     {
         public Cidade() { }
 
-        public Cidade(Estado estado, string nome)
+        public Cidade(Estado estado, string nome, int codigoTom)
         {
-            Set(estado, nome);
+            Set(estado, nome, codigoTom);
         }
 
         public int Id { get; set; }
         public int EstadoId { get; set; }
         public string Nome { get; set; }
+        public int CodigoTom { get; set; }
+        public bool Excluir { get; set; }
 
-        public void Set(Estado estado, string nome)
+        public void Set(Estado estado, string nome, int codigoTom)
         {
             Estado = estado;
             Nome = nome;
+            CodigoTom = codigoTom;
 
             if (Estado != null)
             {

@@ -9,7 +9,7 @@ namespace WebApplication.Infra.Mapping
         {
             ToTable("compras");
 
-            HasMany(x => x.ItensCompra).WithRequired(x => x.Compra).HasForeignKey(x => x.CompraId).WillCascadeOnDelete(false);
+            HasMany(x => x.ItensCompra).WithRequired(x => x.Compra).HasForeignKey(x => x.CompraId).WillCascadeOnDelete(true);
         }
     }
 }

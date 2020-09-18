@@ -8,6 +8,8 @@ namespace WebApplication.Infra.Mapping
         public CidadeMap()
         {
             ToTable("cidades");
+
+            Ignore(x => x.Excluir);
         }
     }
 }

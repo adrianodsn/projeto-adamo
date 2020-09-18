@@ -4,9 +4,13 @@ using WebApplication.Entities;
 
 namespace WebApplication.Infra.Context
 {
-    public partial class ApContext : DbContext
+    public partial class ApplicationContext : DbContext
     {
-        public ApContext() : base("name=ApContext") { }
+        public ApplicationContext() : base("name=NomeStringConexao")
+        {
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
+        }
 
         public virtual DbSet<Cidade> Cidades { get; set; }
         public virtual DbSet<Estado> Estados { get; set; }
@@ -28,7 +32,7 @@ namespace WebApplication.Infra.Context
                 .Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Configurations
-                .AddFromAssembly(typeof(ApContext).Assembly);
+                .AddFromAssembly(typeof(ApplicationContext).Assembly);
         }
     }
 }

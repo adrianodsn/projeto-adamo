@@ -5,16 +5,15 @@ using WebApplication.Infra.Context;
 
 namespace WebApplication
 {
-    public partial class PgProduto : Page
+    public partial class PgProduto : PaginaBase
     {
-        ApContext DB = new ApContext();
         Produto Produto { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             var id = Convert.ToInt32(Request.QueryString["id"]);
 
-            Produto = DB.Produtos.Find(id);
+            Produto = Uow.ProdutoRepository.Procurar(id);
 
             if (!IsPostBack)
             {
@@ -40,7 +39,7 @@ namespace WebApplication
             if (Produto == null)
             {
                 Produto = new Produto(descricao, valorUnit, qtdEsoque);
-                DB.Produtos.Add(Produto);
+                Uow.ProdutoRepository.Adicionar(Produto);
             }
             else
             {
@@ -49,7 +48,7 @@ namespace WebApplication
 
             if (Produto.Valid)
             {
-                DB.SaveChanges();
+                Uow.Commit();
 
                 Response.Redirect("produtos.aspx");
             }

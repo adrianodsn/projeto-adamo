@@ -86,41 +86,36 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\js\jquery.mask.min.js" />
+    <Content Include="cidades.aspx" />
     <Content Include="cidade.aspx" />
-    <Content Include="pais.aspx" />
+    <Content Include="compras.aspx" />
+    <Content Include="compra.aspx" />
+    <Content Include="estados.aspx" />
+    <Content Include="estado.aspx" />
     <Content Include="fornecedores.aspx" />
     <Content Include="fornecedor.aspx" />
-    <Content Include="produto.aspx" />
-    <Content Include="produtos.aspx" />
-    <Content Include="compra.aspx" />
-    <Content Include="venda.aspx" />
-    <Content Include="compras.aspx" />
-    <Content Include="vendas.aspx" />
     <Content Include="pessoas.aspx" />
     <Content Include="pessoa.aspx" />
-    <Content Include="estado.aspx" />
-    <Content Include="cidades.aspx" />
-    <Content Include="estados.aspx" />
+    <Content Include="produtos.aspx" />
+    <Content Include="produto.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pais.aspx.cs">
-      <DependentUpon>pais.aspx</DependentUpon>
+    <Compile Include="Application.Master.cs">
+      <DependentUpon>Application.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pais.aspx.designer.cs">
-      <DependentUpon>pais.aspx</DependentUpon>
+    <Compile Include="Application.Master.designer.cs">
+      <DependentUpon>Application.Master</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Filho.cs" />
-    <Compile Include="Entities\Pai.cs" />
-    <Compile Include="Entities\ItemCompra.cs" />
-    <Compile Include="Entities\ItemVenda.cs" />
-    <Compile Include="Entities\Cidade.cs" />
-    <Compile Include="Entities\Fornecedor.cs" />
-    <Compile Include="Entities\Produto.cs" />
-    <Compile Include="Entities\Pessoa.cs" />
-    <Compile Include="Entities\Estado.cs" />
+    <Compile Include="cidades.aspx.cs">
+      <DependentUpon>cidades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cidades.aspx.designer.cs">
+      <DependentUpon>cidades.aspx</DependentUpon>
+    </Compile>
     <Compile Include="cidade.aspx.cs">
       <DependentUpon>cidade.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -128,16 +123,34 @@
     <Compile Include="cidade.aspx.designer.cs">
       <DependentUpon>cidade.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Compra.cs" />
-    <Compile Include="Entities\Venda.cs" />
-    <Compile Include="Infra\Mapping\FilhoMap.cs" />
-    <Compile Include="Infra\Mapping\PaiMap.cs" />
-    <Compile Include="Infra\Mapping\FornecedorMap.cs" />
-    <Compile Include="Infra\Mapping\ItemCompraMap.cs" />
-    <Compile Include="Infra\Mapping\ProdutoMap.cs" />
-    <Compile Include="Infra\Mapping\CompraMap.cs" />
-    <Compile Include="Infra\Mapping\VendaMap.cs" />
-    <Compile Include="Infra\Mapping\ItemVendaMap.cs" />
+    <Compile Include="compras.aspx.cs">
+      <DependentUpon>compras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="compras.aspx.designer.cs">
+      <DependentUpon>compras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="compra.aspx.cs">
+      <DependentUpon>compra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="compra.aspx.designer.cs">
+      <DependentUpon>compra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="estados.aspx.cs">
+      <DependentUpon>estados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="estados.aspx.designer.cs">
+      <DependentUpon>estados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="estado.aspx.cs">
+      <DependentUpon>estado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="estado.aspx.designer.cs">
+      <DependentUpon>estado.aspx</DependentUpon>
+    </Compile>
     <Compile Include="fornecedores.aspx.cs">
       <DependentUpon>fornecedores.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -152,48 +165,28 @@
     <Compile Include="fornecedor.aspx.designer.cs">
       <DependentUpon>fornecedor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="produto.aspx.cs">
-      <DependentUpon>produto.aspx</DependentUpon>
+    <Compile Include="PaginaBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="produto.aspx.designer.cs">
-      <DependentUpon>produto.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="produtos.aspx.cs">
-      <DependentUpon>produtos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="produtos.aspx.designer.cs">
-      <DependentUpon>produtos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="compra.aspx.cs">
-      <DependentUpon>compra.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="compra.aspx.designer.cs">
-      <DependentUpon>compra.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="venda.aspx.cs">
-      <DependentUpon>venda.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="venda.aspx.designer.cs">
-      <DependentUpon>venda.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="compras.aspx.cs">
-      <DependentUpon>compras.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="compras.aspx.designer.cs">
-      <DependentUpon>compras.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="vendas.aspx.cs">
-      <DependentUpon>vendas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="vendas.aspx.designer.cs">
-      <DependentUpon>vendas.aspx</DependentUpon>
-    </Compile>
+    <Compile Include="Entities\Filho.cs" />
+    <Compile Include="Entities\Pai.cs" />
+    <Compile Include="Entities\ItemCompra.cs" />
+    <Compile Include="Entities\ItemVenda.cs" />
+    <Compile Include="Entities\Cidade.cs" />
+    <Compile Include="Entities\Fornecedor.cs" />
+    <Compile Include="Entities\Produto.cs" />
+    <Compile Include="Entities\Pessoa.cs" />
+    <Compile Include="Entities\Estado.cs" />
+    <Compile Include="Entities\Compra.cs" />
+    <Compile Include="Entities\Venda.cs" />
+    <Compile Include="Infra\Mapping\FilhoMap.cs" />
+    <Compile Include="Infra\Mapping\PaiMap.cs" />
+    <Compile Include="Infra\Mapping\FornecedorMap.cs" />
+    <Compile Include="Infra\Mapping\ItemCompraMap.cs" />
+    <Compile Include="Infra\Mapping\ProdutoMap.cs" />
+    <Compile Include="Infra\Mapping\CompraMap.cs" />
+    <Compile Include="Infra\Mapping\VendaMap.cs" />
+    <Compile Include="Infra\Mapping\ItemVendaMap.cs" />
     <Compile Include="pessoas.aspx.cs">
       <DependentUpon>pessoas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -208,38 +201,50 @@
     <Compile Include="pessoa.aspx.designer.cs">
       <DependentUpon>pessoa.aspx</DependentUpon>
     </Compile>
-    <Compile Include="estado.aspx.cs">
-      <DependentUpon>estado.aspx</DependentUpon>
+    <Compile Include="produtos.aspx.cs">
+      <DependentUpon>produtos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="estado.aspx.designer.cs">
-      <DependentUpon>estado.aspx</DependentUpon>
+    <Compile Include="produtos.aspx.designer.cs">
+      <DependentUpon>produtos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="cidades.aspx.cs">
-      <DependentUpon>cidades.aspx</DependentUpon>
+    <Compile Include="produto.aspx.cs">
+      <DependentUpon>produto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="cidades.aspx.designer.cs">
-      <DependentUpon>cidades.aspx</DependentUpon>
+    <Compile Include="produto.aspx.designer.cs">
+      <DependentUpon>produto.aspx</DependentUpon>
     </Compile>
-    <Compile Include="estados.aspx.cs">
-      <DependentUpon>estados.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="estados.aspx.designer.cs">
-      <DependentUpon>estados.aspx</DependentUpon>
-    </Compile>
+    <Compile Include="Repositorio\CidadeRepository.cs" />
+    <Compile Include="Repositorio\IFornecedorRepository.cs" />
+    <Compile Include="Repositorio\FornecedorRepository.cs" />
+    <Compile Include="Repositorio\ICompraRepository.cs" />
+    <Compile Include="Repositorio\IProdutoRepository.cs" />
+    <Compile Include="Repositorio\CompraRepository.cs" />
+    <Compile Include="Repositorio\ProdutoRepository.cs" />
+    <Compile Include="Repositorio\PessoaRepository.cs" />
+    <Compile Include="Repositorio\EstadoRepository.cs" />
+    <Compile Include="Repositorio\IPessoaRepository.cs" />
+    <Compile Include="Repositorio\IDbFactory.cs" />
+    <Compile Include="Repositorio\ICidadeRepository.cs" />
+    <Compile Include="Repositorio\IEstadoRepository.cs" />
+    <Compile Include="Repositorio\IRepository.cs" />
+    <Compile Include="Repositorio\IUnitOfWork.cs" />
+    <Compile Include="Repositorio\Repository.cs" />
+    <Compile Include="Repositorio\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infra\Context\ApContext.cs" />
+    <Compile Include="Infra\Context\ApplicationContext.cs" />
     <Compile Include="Infra\Mapping\PessoaMap.cs" />
     <Compile Include="Infra\Mapping\CidadeMap.cs" />
     <Compile Include="Infra\Mapping\EstadoMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ComprasService.cs" />
     <Compile Include="Utils\Validate.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Application.Master" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -6,25 +6,23 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication.Entities;
 using WebApplication.Infra.Context;
+using WebApplication.Services;
 
 namespace WebApplication
 {
-    public partial class PgCompra : Page
+    public partial class PgCompra : PaginaBase
     {
-        ApContext DB = new ApContext();
         Compra Compra { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             var id = Convert.ToInt32(Request.QueryString["id"]);
 
-            Compra = DB.Compras
-                .Include(x => x.ItensCompra)
-                .FirstOrDefault(x => x.Id == id);
+            Compra = Uow.CompraRepository.ObterCompraIncludeItens(id);
 
             if (!IsPostBack)
             {
-                ddlProdutoIdParent.DataSource = DB.Produtos.OrderBy(x => x.Descricao).ToList();
+                ddlProdutoIdParent.DataSource = Uow.ProdutoRepository.ObterTodos().OrderBy(x => x.Descricao);
                 ddlProdutoIdParent.DataTextField = "Descricao";
                 ddlProdutoIdParent.DataValueField = "Id";
                 ddlProdutoIdParent.DataBind();
@@ -32,7 +30,7 @@ namespace WebApplication
 
                 litAcao.Text = "Nova compra";
 
-                ddlFornecedorId.DataSource = DB.Fornecedores.OrderBy(x => x.Nome).ToList();
+                ddlFornecedorId.DataSource = Uow.FornecedorRepository.ObterTodos().OrderBy(x => x.Nome);
                 ddlFornecedorId.DataTextField = "Nome";
                 ddlFornecedorId.DataValueField = "Id";
                 ddlFornecedorId.DataBind();
@@ -59,11 +57,11 @@ namespace WebApplication
         {
             var itens = new List<ItemCompra>();
 
-            var produtoId = Convert.ToInt32(ddlProdutoIdParent.SelectedValue);
-            var qtd = Convert.ToInt32(txtQtd.Text);
+            var produtoAdicionadoId = Convert.ToInt32(ddlProdutoIdParent.SelectedValue);
+            var produtoAdicionadoQtd = Convert.ToInt32(txtQtd.Text);
+            var produto = Uow.ProdutoRepository.Procurar(produtoAdicionadoId);
 
-            var produto = DB.Produtos.Find(produtoId);
-            itens.Add(new ItemCompra() { ProdutoId = produtoId, Qtd = qtd, ValorUnitario = produto.ValorUnitario });
+            itens.Add(new ItemCompra() { ProdutoId = produtoAdicionadoId, Qtd = produtoAdicionadoQtd, ValorUnitario = produto.ValorUnitario });
 
             foreach (GridViewRow row in grvItensCompra.Rows)
             {
@@ -72,8 +70,8 @@ namespace WebApplication
                 var txtValor = (TextBox)row.FindControl("txtValor");
 
                 var id = Convert.ToInt32(grvItensCompra.DataKeys[row.RowIndex].Values["Id"]);
-                produtoId = !string.IsNullOrEmpty(ddlProdutoId.SelectedValue) ? Convert.ToInt32(ddlProdutoId.SelectedValue) : 0;
-                qtd = !string.IsNullOrEmpty(txtQuantidade.Text) ? Convert.ToInt32(txtQuantidade.Text) : 0;
+                var produtoId = !string.IsNullOrEmpty(ddlProdutoId.SelectedValue) ? Convert.ToInt32(ddlProdutoId.SelectedValue) : 0;
+                var qtd = !string.IsNullOrEmpty(txtQuantidade.Text) ? Convert.ToInt32(txtQuantidade.Text) : 0;
                 var valorUnit = !string.IsNullOrEmpty(txtValor.Text) ? Convert.ToDecimal(txtValor.Text) : 0;
                 var excluir = !row.Visible;
 
@@ -141,12 +139,12 @@ namespace WebApplication
         {
             var dataCompra = Convert.ToDateTime(txtDataCompra.Text);
             var fornecedorId = !string.IsNullOrEmpty(ddlFornecedorId.SelectedValue) ? Convert.ToInt32(ddlFornecedorId.SelectedValue) : 0;
-            var fornecedor = DB.Fornecedores.Find(fornecedorId);
+            var fornecedor = Uow.FornecedorRepository.Procurar(fornecedorId);
 
             if (Compra == null)
             {
                 Compra = new Compra(dataCompra, fornecedor);
-                DB.Compras.Add(Compra);
+                Uow.CompraRepository.Adicionar(Compra);
             }
             else
             {
@@ -154,51 +152,37 @@ namespace WebApplication
             }
 
             foreach (GridViewRow row in grvItensCompra.Rows)
-            {
-                var id = Convert.ToInt32(grvItensCompra.DataKeys[row.RowIndex].Values["Id"]);
+            {                
+                var ddlProdutoId = (DropDownList)row.FindControl("ddlProdutoId");
                 var txtQuantidade = (TextBox)row.FindControl("txtQuantidade");
                 var txtValor = (TextBox)row.FindControl("txtValor");
 
+                var id = Convert.ToInt32(grvItensCompra.DataKeys[row.RowIndex].Values["Id"]);
+                var produtoId = !string.IsNullOrEmpty(ddlProdutoId.SelectedValue) ? Convert.ToInt32(ddlProdutoId.SelectedValue) : 0;
                 var qtd = !string.IsNullOrEmpty(txtQuantidade.Text) ? Convert.ToInt32(txtQuantidade.Text) : 0;
                 var valorUnit = !string.IsNullOrEmpty(txtValor.Text) ? Convert.ToDecimal(txtValor.Text) : 0;
-
-                var ddlProdutoId = (DropDownList)row.FindControl("ddlProdutoId");
-
-                var produtoId = !string.IsNullOrEmpty(ddlProdutoId.SelectedValue) ? Convert.ToInt32(ddlProdutoId.SelectedValue) : 0;
-                var produto = DB.Produtos.Find(produtoId);
 
                 if (row.Visible)
                 {
                     if (id == 0)
                     {
-                        Compra.ItensCompra.Add(new ItemCompra(produto, qtd, valorUnit));
-                        produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque + qtd);
-                    }
-                    else
-                    {
-                        // Não está executando (Não tem alteração dos itens)
-
-                        //ItemCompra itCompra = DB.ItensCompra.Find(id);
-                        //itCompra.Set(produto, qtd, valorUnit);
-                        //produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque - qtdAntiga);
-                        //produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque + qtdNova);
+                        ComprasService.AdicionarItemCompra(Uow, Compra, produtoId, qtd, valorUnit);
                     }
                 }
                 else
                 {
-                    ItemCompra itCompra = DB.ItensCompra.Find(id);
+                    var itemCompra = Compra.ItensCompra.FirstOrDefault(x => x.Id == id);
 
-                    if (itCompra != null)
+                    if (itemCompra != null)
                     {
-                        produto.Set(produto.Descricao, produto.ValorUnitario, produto.QtdEstoque - qtd);
-                        DB.ItensCompra.Remove(itCompra);
+                        ComprasService.ExcluirItemCompra(Uow, itemCompra.Id);
                     }
                 }
             }
 
             if (Compra.Valid)
             {
-                DB.SaveChanges();
+                Uow.Commit();
 
                 Response.Redirect("compras.aspx");
             }

@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Web.UI;
 using WebApplication.Entities;
-using WebApplication.Infra.Context;
 
 namespace WebApplication
 {
-    public partial class PgPessoa : Page
+    public partial class PgPessoa : PaginaBase
     {
-        ApContext DB = new ApContext();
         Pessoa Pessoa { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             var id = Convert.ToInt32(Request.QueryString["id"]);
 
-            Pessoa = DB.Pessoas.Find(id);
+            Pessoa = Uow.PessoaRepository.Procurar(id);
 
             if (!IsPostBack)
             {
@@ -40,7 +37,7 @@ namespace WebApplication
             if (Pessoa == null)
             {
                 Pessoa = new Pessoa(nome, cpf, Convert.ToDateTime(dataNascimento));
-                DB.Pessoas.Add(Pessoa);
+                Uow.PessoaRepository.Adicionar(Pessoa);
             }
             else
             {
@@ -49,7 +46,7 @@ namespace WebApplication
 
             if (Pessoa.Valid)
             {
-                DB.SaveChanges();
+                Uow.Commit();
 
                 Response.Redirect("pessoas.aspx");
             }

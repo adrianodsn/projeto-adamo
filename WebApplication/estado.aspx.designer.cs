@@ -24,15 +24,6 @@ namespace WebApplication
         protected global::System.Web.UI.WebControls.Literal litAcao;
 
         /// <summary>
-        /// form control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form;
-
-        /// <summary>
         /// txtNome control.
         /// </summary>
         /// <remarks>
@@ -49,6 +40,33 @@ namespace WebApplication
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSigla;
+
+        /// <summary>
+        /// btnAdicionarCidade control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAdicionarCidade;
+
+        /// <summary>
+        /// uppCidades control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel uppCidades;
+
+        /// <summary>
+        /// ltvCidades control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView ltvCidades;
 
         /// <summary>
         /// ltvNotifications control.

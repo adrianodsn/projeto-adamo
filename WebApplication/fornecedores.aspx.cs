@@ -6,10 +6,8 @@ using WebApplication.Infra.Context;
 
 namespace WebApplication
 {
-    public partial class PgFornecedores : Page
+    public partial class PgFornecedores : PaginaBase
     {
-        ApContext DB = new ApContext();
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -20,32 +18,34 @@ namespace WebApplication
 
         private void CarregarRegistros()
         {
-            IQueryable<Fornecedor> fornecedores = DB.Fornecedores;
-
             var nom = Request.QueryString["nom"];
             var cnpj = Request.QueryString["cnpj"];
 
-            if (!string.IsNullOrEmpty(nom))
-            {
-                txtNome.Text = nom;
+            txtNome.Text = nom;
+            txtCnpj.Text = cnpj;
 
-                fornecedores = fornecedores.Where(x => x.Nome.Contains(nom));
-            }
+            var fornecedores = Uow.FornecedorRepository.BuscarFornecedores(nom, cnpj);
 
-            if (!string.IsNullOrEmpty(cnpj))
-            {
-                txtCnpj.Text = cnpj;
-
-                fornecedores = fornecedores.Where(x => x.Cnpj == cnpj);
-            }
-
-            grvFornecedores.DataSource = fornecedores.ToList();
+            grvFornecedores.DataSource = fornecedores;
             grvFornecedores.DataBind();
         }
 
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             Response.Redirect($"fornecedores.aspx?nom={txtNome.Text}&cnpj={txtCnpj.Text}");
+        }
+
+        protected void grvFornecedores_RowDeleting(object sender, System.Web.UI.WebControls.GridViewDeleteEventArgs e)
+        {
+            var id = Convert.ToInt32(grvFornecedores.DataKeys[e.RowIndex].Value);
+            Uow.FornecedorRepository.Deletar(x => x.Id == id);
+            Uow.Commit();
+            CarregarRegistros();
+        }
+
+        protected void btnLimpar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect($"fornecedores.aspx");
         }
     }
 }

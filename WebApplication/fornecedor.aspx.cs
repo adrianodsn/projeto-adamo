@@ -5,16 +5,15 @@ using WebApplication.Infra.Context;
 
 namespace WebApplication
 {
-    public partial class PgFornecedor : Page
+    public partial class PgFornecedor : PaginaBase
     {
-        ApContext DB = new ApContext();
         Fornecedor Fornecedor { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             var id = Convert.ToInt32(Request.QueryString["id"]);
 
-            Fornecedor = DB.Fornecedores.Find(id);
+            Fornecedor = Uow.FornecedorRepository.Procurar(id);
 
             if (!IsPostBack)
             {
@@ -39,7 +38,7 @@ namespace WebApplication
             if (Fornecedor == null)
             {
                 Fornecedor = new Fornecedor(cnpj, nome);
-                DB.Fornecedores.Add(Fornecedor);
+                Uow.FornecedorRepository.Adicionar(Fornecedor);
             }
             else
             {
@@ -48,7 +47,7 @@ namespace WebApplication
 
             if (Fornecedor.Valid)
             {
-                DB.SaveChanges();
+                Uow.Commit();
 
                 Response.Redirect("fornecedores.aspx");
             }

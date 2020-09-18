@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Linq;
-using System.Web.UI;
-using WebApplication.Entities;
-using WebApplication.Infra.Context;
 
 namespace WebApplication
 {
-    public partial class PgPessoas : Page
+    public partial class PgPessoas : PaginaBase
     {
-        ApContext DB = new ApContext();
-
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -20,9 +15,7 @@ namespace WebApplication
 
         private void CarregarRegistros()
         {
-            IQueryable<Pessoa> pessoas = DB.Pessoas;
-
-            var nom = Request.QueryString["nom"];
+            var nome = Request.QueryString["nome"];
             var cpf = Request.QueryString["cpf"];
 
             DateTime? dataIni = null;
@@ -38,50 +31,34 @@ namespace WebApplication
                 dataFim = _dataFim;
             }
 
-            if (!string.IsNullOrEmpty(nom))
-            {
-                txtNome.Text = nom;
+            txtNome.Text = nome;
+            txtCpf.Text = cpf;
 
-                pessoas = pessoas.Where(x => x.Nome.Contains(nom));
-            }
+            if (dataIni != null) txtDataNascIni.Text = dataIni.Value.ToString("yyyy-MM-dd");
+            if (dataFim != null) txtDataNascFim.Text = dataFim.Value.ToString("yyyy-MM-dd");
 
-            if (!string.IsNullOrEmpty(cpf))
-            {
-                txtCpf.Text = cpf;
+            var pessoas = Uow.PessoaRepository.BuscarPessoas(nome, cpf, dataIni, dataFim);
 
-                pessoas = pessoas.Where(x => x.Cpf == cpf);
-            }
-
-            if (dataIni != null)
-            {
-                txtDataNascIni.Text = dataIni.Value.ToString("yyyy-MM-dd");
-
-                pessoas = pessoas.Where(x => x.DataNascimento >= dataIni);
-            }
-
-            if (dataFim != null)
-            {
-                txtDataNascFim.Text = dataFim.Value.ToString("yyyy-MM-dd");
-
-                pessoas = pessoas.Where(x => x.DataNascimento <= dataFim);
-            }
-
-            grvPessoas.DataSource = pessoas.ToList();
+            grvPessoas.DataSource = pessoas;
             grvPessoas.DataBind();
         }
 
         protected void btnFilter_Click(object sender, EventArgs e)
         {
-            Response.Redirect($"pessoas.aspx?nom={txtNome.Text}&cpf={txtCpf.Text}&dataIni={txtDataNascIni.Text}&dataFim={txtDataNascFim.Text}");
+            Response.Redirect($"pessoas.aspx?nome={txtNome.Text}&cpf={txtCpf.Text}&dataIni={txtDataNascIni.Text}&dataFim={txtDataNascFim.Text}");
         }
 
         protected void grvPessoas_RowDeleting(object sender, System.Web.UI.WebControls.GridViewDeleteEventArgs e)
         {
             var id = Convert.ToInt32(grvPessoas.DataKeys[e.RowIndex].Value);
-            var pessoa = DB.Pessoas.Find(id);
-            DB.Pessoas.Remove(pessoa);
-            DB.SaveChanges();
+            Uow.PessoaRepository.Deletar(x => x.Id == id);
+            Uow.Commit();
             CarregarRegistros();
+        }
+
+        protected void btnLimpar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect($"pessoas.aspx");
         }
     }
 }

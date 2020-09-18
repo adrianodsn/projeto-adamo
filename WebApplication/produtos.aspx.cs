@@ -6,10 +6,8 @@ using WebApplication.Infra.Context;
 
 namespace WebApplication
 {
-    public partial class PgProdutos : Page
+    public partial class PgProdutos : PaginaBase
     {
-        ApContext DB = new ApContext();
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -20,24 +18,32 @@ namespace WebApplication
 
         private void CarregarRegistros()
         {
-            IQueryable<Produto> produtos = DB.Produtos;
-
             var descricao = Request.QueryString["descricao"];
 
-            if (!string.IsNullOrEmpty(descricao))
-            {
-                txtDescricao.Text = descricao;
+            txtDescricao.Text = descricao;
 
-                produtos = produtos.Where(x => x.Descricao.Contains(descricao));
-            }
+            var produtos = Uow.ProdutoRepository.BuscarProdutos(descricao);
 
-            grvProdutos.DataSource = produtos.ToList();
+            grvProdutos.DataSource = produtos;
             grvProdutos.DataBind();
         }
 
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             Response.Redirect($"produtos.aspx?descricao={txtDescricao.Text}");
+        }
+
+        protected void grvProdutos_RowDeleting(object sender, System.Web.UI.WebControls.GridViewDeleteEventArgs e)
+        {
+            var id = Convert.ToInt32(grvProdutos.DataKeys[e.RowIndex].Value);
+            Uow.ProdutoRepository.Deletar(x=>x.Id == id);
+            Uow.Commit();
+            CarregarRegistros();
+        }
+
+        protected void btnLimpar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect($"produtos.aspx");
         }
     }
 }

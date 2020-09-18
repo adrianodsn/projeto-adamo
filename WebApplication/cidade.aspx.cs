@@ -1,28 +1,24 @@
 ﻿using System;
-using System.Linq;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication.Entities;
-using WebApplication.Infra.Context;
 
 namespace WebApplication
 {
-    public partial class PgCidade : Page
+    public partial class PgCidade : PaginaBase
     {
-        ApContext DB = new ApContext();
         Cidade Cidade { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             var id = Convert.ToInt32(Request.QueryString["id"]);
 
-            Cidade = DB.Cidades.Find(id);
+            Cidade = Uow.CidadeRepository.Procurar(id);
 
             if (!IsPostBack)
             {
                 litAcao.Text = "Nova cidade";
 
-                ddlEstadoId.DataSource = DB.Estados.ToList();
+                ddlEstadoId.DataSource = Uow.EstadoRepository.ObterTodos();
                 ddlEstadoId.DataTextField = "Nome";
                 ddlEstadoId.DataValueField = "Id";
                 ddlEstadoId.DataBind();
@@ -34,6 +30,7 @@ namespace WebApplication
 
                     txtNome.Text = Cidade.Nome;
                     ddlEstadoId.SelectedValue = Cidade.EstadoId.ToString();
+                    txtCodigoTom.Text = Cidade.CodigoTom > 0 ? Cidade.CodigoTom.ToString() : string.Empty;
                 }
             }
         }
@@ -42,23 +39,23 @@ namespace WebApplication
         {
             var estadoId = !string.IsNullOrEmpty(ddlEstadoId.SelectedValue) ? Convert.ToInt32(ddlEstadoId.SelectedValue) : 0;
             var nome = txtNome.Text.Trim();
+            var codigoTom = Convert.ToInt32(txtCodigoTom.Text);
 
-            var estado = DB.Estados.Find(estadoId);
+            var estado = Uow.EstadoRepository.Procurar(estadoId);
 
             if (Cidade == null)
             {
-                Cidade = new Cidade(estado, nome);
-                DB.Cidades.Add(Cidade);
+                Cidade = new Cidade(estado, nome, codigoTom);
+                Uow.CidadeRepository.Adicionar(Cidade);
             }
             else
             {
-                Cidade.Set(estado, nome);
+                Cidade.Set(estado, nome, codigoTom);
             }
 
             if (Cidade.Valid)
             {
-                DB.SaveChanges();
-
+                Uow.Commit();
                 Response.Redirect("cidades.aspx");
             }
             else
